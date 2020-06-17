@@ -1,0 +1,20 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: r
+r: bioc-devel
+sudo: required
+cache: packages
+warnings_are_errors: true
+r_github_packages:
+  - jimhester/covr
+bioc_packages:
+  - AnnotationHub
+  - biomaRt
+  - DESeq2
+  - gage
+  - gageData
+  - pathview
+before_install:
+  - tlmgr install index
+after_success:
+  - Rscript -e 'covr::codecov()'
